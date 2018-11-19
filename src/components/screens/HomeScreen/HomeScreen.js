@@ -10,20 +10,15 @@ import {
 } from "react-native";
 
 // External Library imports
-import { Container, Content, View, Card, Icon, Button} from 'native-base';
+import { Container, Content } from 'native-base';
 
 // Local Imports
+import { primaryColor } from '../../../settings';
 import HomeScreenHeader from './HomeScreenHeader';
 import CategoryView from './CategoryView';
 import EmployeeList from './EmployeeList';
-import { primaryColor } from '../../../settings';
 import FeaturedView from './FeaturedView';
 import viewSwitcher from './viewSwitcher';
-// import FeaturedView from './FeaturedView';
-// import RecommendedView from './RecommendedView';
-// import CategoryView from './CategoryView';
-// import PromoCard from './PromoCard';
-// import PostNewFab from './PostNewFab';
 import EQuoteCard from '../../reusables/EQuoteCard';
 
 export default class HomeScreen extends Component {
@@ -42,7 +37,7 @@ export default class HomeScreen extends Component {
     })
 
     render() {
-        const type = this.props.navigation.getParam('type');
+        const type = this.props.navigation.getParam('type'); //gives type of user
 
         console.log("HomeRender")
         return (

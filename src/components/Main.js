@@ -6,18 +6,9 @@ import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 
 // Local Imports
-// import getTheme from '../../native-base-theme/components';
-// import LoginScreen from './screens/LoginScreen';
-// import TestScreen from './screens/TestScreen';
+import Login from './screens/LoginScreen';
+import Access from './screens/AccessGroupScreen';
 import DrawerContent from './DrawerContent';
-// import { postUser } from '../actions';
-// import AccessGroupScreen from './screens/AccessGroupScreen';
-// import HomeScreen from './screens/HomeScreen/HomeScreen';
-// import ItemDetailScreen from './screens/ItemDetailScreen/ItemDetailScreen';
-import { StyleProvider } from 'native-base';
-import { setPrimaryColor } from '../settings';
-// import EQuoteListScreen from './screens/EQuoteListScreen/EQuoteListScreen';
-
 
 const Drawer = createDrawerNavigator({
         // For each screen that you can navigate to, create a new entry like this:
@@ -39,12 +30,16 @@ const Drawer = createDrawerNavigator({
     
 // The Root of our Stack Navigation
 const RootStack = createStackNavigator({
-    Access: {
+  Login: {
+    screen: LoginScreen
+  },
+  Drawer: { 
+    screen: Drawer
+  },  
+  Access: {
       screen: AccessGroupScreen
     },
-    Drawer: { 
-      screen: Drawer
-    },
+    
     // Home: {
     //   screen: HomeScreen
     // },
@@ -79,14 +74,15 @@ class Main extends Component {
   render() {
 
     console.log('MainRender');
+    return <RootStack/>
 
-    // The application is initialising
-    if (this.state.loading) return null;
+    // // The application is initialising
+    // if (this.state.loading) return null;
 
-    // The response is an Object, so they're logged in and posted
-    if (this.state.user){   
-      return <RootStack/>
-    }
+    // // The response is an Object, so they're logged in and posted
+    // if (this.state.user){   
+    //   return <RootStack/>
+    // }
 
     // The user is null, so they're logged out
     // return <LoginScreen />
