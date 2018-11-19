@@ -7,53 +7,65 @@ import {
     SafeAreaView,
 } from 'react-native';
 
-// External Library imports
-import { Container, Text, Content} from 'native-base';
-import { withNavigation } from 'react-navigation';
-
-import { getQuotes } from '../../../actions/ItemActions'
-
 import { connect } from 'react-redux';
+
+// External Library imports
+import { Container, Text, Content, StyleProvider} from 'native-base';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
 // Local Imports
-import EQuoteListScreenHeader from './EQuoteListScreenHeader';
-import EQuoteCard from '../../reusables/EQuoteCard';
+import OrderListScreenHeader from './OrderListScreenHeader';
+import { getOrders } from '../../../actions/ItemActions'
+import ItemCard from '../../reusables/ItemCard';
+import { primaryColor } from '../../../settings';
+import getTheme from '../../../../native-base-theme/components';
+import {getThemeFromColor} from '../../../../native-base-theme/variables/material';
 
-class EQuoteListScreen extends Component {
-
+class OrderListScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.props.getQuotes();
+        this.props.getOrders();
     }
-    
+
+    componentDidMount() {
+        this.props.getItems('laptop')
+    }
+        
     renderItems() {
-        return this.props.list.map((item) => {
-            return (
-                <EQuoteCard 
-                        key={item.expiry_date}
+        if(this.props.list){
+            return this.props.list.map((item) => {
+                return (
+                    <ItemCard 
+                        key={item.id}
                         item={item}
+                        rightIconName='heart'
                     />
-            );
-        });
+                    );
+                });
+            }
     }
     
     render(){
+        const item = this.props.navigation.getParam('itemList');
+        console.log(this.props);
         return(
+            <StyleProvider style={getTheme(getThemeFromColor(this.props.color))}>
+
             <Container>
-                <EQuoteListScreenHeader 
-                            leftIconName='ios-arrow-back'
-                            onLeftButtonPress={() => this.props.navigation.goBack()}
-                            headerTitle='Quotes'
+                <OrderListScreenHeader 
+                    leftIconName='ios-arrow-back'
+                    onLeftButtonPress={() => this.props.navigation.goBack()}
+                    headerTitle={item.title}
                 />
 
                 <View style={styles.headerViewContainer}>
                     <View style={styles.headerLeftView} >
                         <TouchableOpacity activeOpacity={0.9}
+                        //onPress
                         >
-                            <Icon name='ios-apps' size={40} paddingTop={5} style={styles.gridIconContainerStyle} />
+                            <Icon name='ios-apps' size={40} paddingTop={5} style={styles.iconContainerStyle} />
                         </TouchableOpacity>
                     </View>
 
@@ -86,9 +98,19 @@ class EQuoteListScreen extends Component {
                     </SafeAreaView>
                 </Content>
             </Container>
+            </StyleProvider>
         );
     }
 }
+
+const mapStateToProps = state => {
+    return({
+        list:state.item.data
+    });
+}
+
+export default connect(mapStateToProps, { getOrders })(OrderListScreen);
+
 const styles= {
     headerViewContainer:{
         flexDirection: 'row',
@@ -114,25 +136,9 @@ const styles= {
         alignItems: 'center'
     },
     iconContainerStyle:{
-        color: '#003366',
+        color: primaryColor,
         flexDirection: 'row',
         alignItems: 'center',
         paddingLeft: 30,
-    },
-    gridIconContainerStyle:{
-        color: '#003366',
-        flexDirection: 'row',
-        alignItems: 'center',
     }
 }
-
-const mapStateToProps = state => {
-    return({
-        error: state.auth.error,
-        loading: state.auth.loading,
-        list: state.item.data,
-    });
-}
-// withNavigation returns a component that wraps MyBackButton and passes in the
-// navigation prop
-export default connect(mapStateToProps, { getQuotes })(withNavigation(EQuoteListScreen));;

@@ -7,32 +7,41 @@ import {
 // Local Imports
 import CategoryView from './CategoryView';
 import EmployeeList from './EmployeeList';
+import UserView from './UserView';
 import EQuotesView from './EQuotesView';
 import FeaturedView from './FeaturedView';
 import RecommendedView from './RecommendedView';
 
 shopper=()=>{
-    return <FeaturedView />
+    console.log("Featured")
+    return (
+    <View>
+        <FeaturedView />
+        <RecommendedView />
+    </View>
+    );
 }
 
 buyer=()=>{
+    console.log("zc sbuyc")
     return <EQuotesView />
 }
 
 admin=()=>{
-    return <EmployeeList />
+    return <UserView />
 }
 
 callSwitch=(type)=>{
+    console.log('switch')
     switch(type) {
         case 'Shopper':
-            this.shopper();
+            return this.shopper();
             break;
         case 'Buyer':
-            this.buyer();
+            return this.buyer();
             break;
         case 'Admin':
-            this.admin();
+            return this.admin();
             break;
     }
 }
@@ -41,8 +50,6 @@ export default viewSwitcher = (type) => {
     
     return(
         <View>
-
-        <Text>{type}</Text>
                                 
         <CategoryView />
 

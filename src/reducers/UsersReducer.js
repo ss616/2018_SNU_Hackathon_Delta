@@ -1,5 +1,5 @@
 import { 
-    GET_RECOMMENDATIONS, GET_ITEM_FAIL, GET_RECOMMENDATIONS_SUCCESS, GET_RECOMMENDATIONS_FAIL
+    GET_USERS, GET_USERS_FAIL, GET_USERS_SUCCESS,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -10,16 +10,15 @@ const INITIAL_STATE = {
 };
 
 export default (state  = INITIAL_STATE, action) => {
-    console.log(action.payload)
     switch (action.type) {
         
-        case GET_RECOMMENDATIONS:
+        case GET_USERS:
             return {...state, loading: true, error: ''};
 
-        case GET_RECOMMENDATIONS_SUCCESS:
+        case GET_USERS_SUCCESS:
             return {...state, ...INITIAL_STATE, data: action.payload.data.results};
             
-        case GET_RECOMMENDATIONS_FAIL:
+        case GET_USERS_FAIL:
             return {...state, error: 'Authentication Failed.', loading: false};
     
         default:

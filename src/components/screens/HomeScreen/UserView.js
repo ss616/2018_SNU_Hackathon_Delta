@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 
-import { Container, Content, Card, Icon, Button, H2, H3} from 'native-base';
+import { Container, Content, Card, H3} from 'native-base';
 import { withNavigation } from 'react-navigation';
 
-import EQuoteCard from '../../reusables/EQuoteCard';
+import UserCard from '../../reusables/UserCard';
 
-import {getOrders} from '../../../actions/ItemActions';
+import { connect } from 'react-redux';
 
+import { getUsers } from '../../../actions/ItemActions'
 
-class OrdersView extends Component {
+class UserView extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.props.getOrders();
+        this.props.getUsers();
     }
 
     renderItems() {
         return this.props.list.slice(1,4).map((item) => {
             return (
-                <EQuoteCard 
+                <UserCard 
                         key={item.expiry_date}
                         item={item}
-                />
+                    />
             );
         });
     }
@@ -39,7 +40,7 @@ class OrdersView extends Component {
             </H3>
             <ScrollView>
                 {cards}
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('OrderList')}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('UserList')}>
                     <Text style={styles.headerText}>View More</Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -63,12 +64,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return({
-        error: state.auth.error,
-        loading: state.auth.loading,
-        list: state.item.data,
+        error: state.user.error,
+        loading: state.user.loading,
+        list: state.user.data,
     });
 }
-
 // withNavigation returns a component that wraps MyBackButton and passes in the
 // navigation prop
-export default connect(mapStateToProps, {getOrders})(withNavigation(OrdersView));
+export default connect(mapStateToProps, { getUsers })(withNavigation(UserView));;
