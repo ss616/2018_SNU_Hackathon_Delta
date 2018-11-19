@@ -1,0 +1,3 @@
+rootProject.name = 'Delta_FrontEnd'
+
+include ':app'
