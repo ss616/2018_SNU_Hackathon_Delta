@@ -41,12 +41,12 @@ const Drawer = createDrawerNavigator({
     
 // The Root of our Stack Navigation
 const RootStack = createStackNavigator({
-    // Access: {
-    //   screen: AccessGroupScreen
-    // },
-    // Drawer: { 
-    //   screen: Drawer
-    // },
+    Access: {
+      screen: AccessGroupScreen
+    },
+    Drawer: { 
+      screen: Drawer
+    },
     // Home: {
     //   screen: HomeScreen
     // },

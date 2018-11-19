@@ -20,43 +20,6 @@ export default class DrawerContent extends Component {
   }
 }
 
-// export default class DrawerContent extends Component {
-//   render() {
-//       console.log("DC")
-//       console.log(this.props)
-//       return (
-//         <Container>
-//         <Header style={styles.drawerHeader}>
-//           <Body>
-//             <Image
-//               style={styles.drawerImage}
-//               source={require('../assets/DrawerIcons/logo.png')} />
-//           </Body>
-//         </Header>
-//         <Content>
-//           <DrawerItems {...this.props} />
-//         </Content>
-//       </Container>
-//       );
-//   }
-// }
-
-// const DrawerContent = (props) => (
-//     <Container>
-//       <Header style={styles.drawerHeader}>
-//         <Body>
-//           <Image
-//             style={styles.drawerImage}
-//             source={require('../assets/DrawerIcons/logo.png')} />
-//         </Body>
-//       </Header>
-//       <Content>
-//         <DrawerItems {...props} />
-//       </Content>
-//     </Container>
-//   );
-
-
 const styles = StyleSheet.create({
 
     container: {
